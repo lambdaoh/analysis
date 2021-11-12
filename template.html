@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- this css stylesheet is borrowed from https://github.com/hyrious/github-markdown-css -->
+    <link rel="stylesheet" type="text/css" href="github-markdown-dark.css">
+    <style>
+        /* github markdown settings */
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+
+        /* My css settings */
+        .smiles {
+            font-weight: bold;
+        }
+
+        .chem_struct {
+            text-align: center;
+        }
+
+        .chem_struct>div {
+            display: inline-block;
+          /* box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3) inset; */
+        }
+
+        .chem_struct img {
+          /* position: relative;
+             z-index: -1; */
+        }
+
+        .score {
+            margin-left: auto;
+            text-align: right;
+            font-weight: bold;
+            color: pink;
+            margin: 5%;
+        }
+    </style>
+
+    <title>PCCS Analisis</title>
+</head>
+
+<body class="markdown-body">
+    <h1>Prediction Results</h1>
+    {% for item in results %}
+    <section>
+        <h2>{{item.name}}</h2>
+        <h3>Reference Prediction</h3>
+        <pre class="smiles">{{item.ref_s}}</pre>
+        <div class="chem_struct">
+            <div><img src="{{item.ref_img}}"></div>
+        </div>
+        <h3>{{item.sys1}} Prediction</h3>
+        <pre class="smiles">{{item.sys1_s}}</pre>
+        <div class="score">Confidence Score: {{item.sys1_score}}</div>
+        <div class="chem_struct">
+            <div><img src="{{item.sys1_img}}"></div>
+        </div>
+        <h3>{{item.sys2}} Prediction</h3>
+        <pre class="smiles">{{item.sys2_s}}</pre>
+        <div class="chem_struct">
+            <div><img src="{{item.sys2_img}}"></div>
+        </div>
+    </section>
+    {% endfor %}
+</body>
+
+</html>
